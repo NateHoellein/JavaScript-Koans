@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+
+  <link rel="stylesheet" type="text/css" href="support/jasmine/jasmine.css">
+  <script type="text/javascript" src="support/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="support/jasmine/jasmine-html.js"></script>
+  <script type="text/javascript" src="support/jasmine/jquery.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="topics/about_expects.js"></script>
+  <script type="text/javascript" src="topics/about_operators.js"></script>
+
+  <!-- include source files here... -->
+
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+      jasmineEnv.verbose = true;
+
+        // This function proxies the trivial reporter so that it shows the passed tests by default. Good in class.
+        (function(){
+          var proxied = jasmine.TrivialReporter.prototype.reportRunnerResults;
+          jasmine.TrivialReporter.prototype.reportRunnerResults = function(){
+            proxied.apply(this, arguments);
+
+            $( '#__jasmine_TrivialReporter_showPassed__' )
+              .trigger( 'click' )
+              .trigger( 'click' ) //on chrome, two are needed...
+              .attr( 'checked', true );
+            $('#__jasmine_TrivialReporter_showSkipped__')
+              .trigger( 'click' )
+              .trigger( 'click' )
+              .attr( 'checked', true);
+          }
+        })();
+      var trivialReporter = new jasmine.TrivialReporter();
+
+
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+        $('#')
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+
+</body>
+</html>
