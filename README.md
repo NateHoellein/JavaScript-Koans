@@ -1,9 +1,7 @@
 Update
 ======
 
-> This project was forked from Liam McLennan's original work using QUnit.  If you like JavaScript Koans you might enjoy his newer, more user 
-
-friendly, project [Didacto: JavaScript](http://javascript.didacto.net/)
+This project was forked from Liam McLennan's [original work](https://github.com/liammclennan/JavaScript-Koans) using QUnit.  
 
 JavaScript Koans is an interactive learning environment that uses failing tests to introduce students to aspects of JavaScript in a logical sequence. 
 
