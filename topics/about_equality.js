@@ -1,4 +1,4 @@
-describe("About Equality", function() {
+describe("About Equality (topics/about_equality.js)", function() {
   it("shows numeric equality", function() {
     expect(3 + __).toBe(7);
   });

@@ -1,4 +1,4 @@
-describe("About Operators (topics/about_operators.js", function() {
+describe("About Operators (topics/about_operators.js)", function() {
   it("Addition", function() {
     var result = 0;
     //starting i at 0, add i to result and increment i by 1 until i is equal to 5

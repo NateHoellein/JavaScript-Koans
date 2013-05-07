@@ -1,4 +1,4 @@
-describe("About Truthyness",function() {
+describe("About Truthyness (topics/about_thruthyness)",function() {
   
   it("for positive numbers", function() {
     var oneIsTruthy = 1 ? true : false;

@@ -1,4 +1,4 @@
-describe("About Assignment",function() {
+describe("About Assignment (topics/about_assignments.js)",function() {
   it("scopes local variables", function() {
     var temp = __;
     expect(temp).toBe(1);
