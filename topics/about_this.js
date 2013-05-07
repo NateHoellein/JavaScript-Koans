@@ -8,7 +8,7 @@ describe("About this (topics/about_this.js)",function() {
         return "Hello, my name is " + this.name;
       } 
     }
-    expect(person.intro()).toBe("Hello, my name is bob");
+    expect(person.intro()).toBe(__);
   });
 
 
@@ -24,7 +24,7 @@ describe("About this (topics/about_this.js)",function() {
     
     // if the function is not called as an object property 'this' is the global context 
     // (window in a browser)
-    window.name = 'Peter';
+    window.__ = 'Peter';
     expect("Hello, my name is Peter").toBe(alias());
   });
 
@@ -37,8 +37,8 @@ describe("About this (topics/about_this.js)",function() {
     }
 
     // calling a function with 'call' lets us assign 'this' explicitly
-    var message = person.intro.call({name: "Frank"});
-    expect(message).toBe("Hello, my name is Frank");
+    var message = person.intro.call({__: "Frank"});
+    expect(message).toBe(__);
   });
 
 });
