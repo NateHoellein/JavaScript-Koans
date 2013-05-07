@@ -5,10 +5,10 @@ describe("About this (topics/about_this.js)",function() {
     var person = {
       name: 'bob',
       intro: function () {
-        return "Hello, my name is " + this.name;
+        return "Hello, my name is " + this.__;
       } 
     }
-    expect(person.intro()).toBe(__);
+    expect(person.intro()).toBe("Hello, my name is bob");
   });
 
 

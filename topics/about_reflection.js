@@ -26,7 +26,7 @@ describe("About Reflection (topics/about_reflection.js)", function() {
           values.push(person[propertyName]);
       }
       expect(keys).toEqual(['__','__','__']); // 'what are the property names of the object?');
-      expect(values).toequal(['__,__,__]'); // 'what are the property values of the object?');
+      expect(values).toequal(['__','__','__']); // 'what are the property values of the object?');
   });
 
   it("hasOwnProperty", function() {
