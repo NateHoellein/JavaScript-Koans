@@ -2,26 +2,42 @@
 
 var __ = 'incomplete';
 
-/*
- *
- * TODO: find a way to override toBe and toEqual and report a skipped spec.
-originalToBe = jasmine.Matchers.prototype.toBe;
+var originalToBe = jasmine.Matchers.prototype.toBe;
+var originalToEqual = jasmine.Matchers.prototype.toEqual;
+var originalToMatch = jasmine.Matchers.prototype.toMatch;
 
 jasmine.Matchers.prototype.toBe = function(expected) {
   var that = this;
-  this.actual = that.actual;
-  var env = jasmine.getEnv();
-  if(expected === '__') {
-      console.log('Test needs to be completed.'); 
-      this.spec.suite.queue.blocks[0].results_ = {
-        id: this.id,
-        status: 'disabled',
-        description: this.description
-        //fullName: this.getFullName()
-      };
-      return void 0;
+  if(expected === __ || this.actual.indexOf(__)) {
+      this.message = function() {
+        return "I see this spec is incomplete, you have more work to do.";
+      }
+      return false;
     } else {
-      return originalToBe.call(this,expected);  
+      return originalToBe.call(that,expected);  
     };
 };
-*/
+
+jasmine.Matchers.prototype.toEqual = function(expected) {
+  var that = this;
+  if(expected === __) {
+      this.message = function() {
+        return "I see this spec is incomplete, you have more work to do.";
+      }
+      return false;
+    } else {
+      return originalToEqual.call(that,expected);  
+    };
+};
+
+jasmine.Matchers.prototype.toMatch = function(expected) {
+  var that = this;
+  if(expected === __) {
+      this.message = function() {
+        return "I see this spec is incomplete, you have more work to do.";
+      }
+      return false;
+    } else {
+      return originalToMatch.call(that,expected);  
+    };
+};
