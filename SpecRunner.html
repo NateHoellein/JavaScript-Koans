@@ -13,23 +13,22 @@
   <!-- include spec files here ... -->
   <script type="text/javascript" src="support/koans.js"></script>
   <script type="text/javascript" src="topics/about_expects.js"></script>  <!--  3 -->
-  <script type="text/javascript" src="topics/about_operators.js"></script> 
-  <script type="text/javascript" src="topics/about_equality.js"></script>
-  <!--<script type="text/javascript" src="topics/about_truthyness.js"></script>
-  <script type="text/javascript" src="topics/about_assignment.js"></script>
-  <script type="text/javascript" src="topics/about_control_structures.js"></script>
-  <script type="text/javascript" src="topics/about_strings.js"></script>
-  <script type="text/javascript" src="topics/about_numbers.js"></script>
-  <script type="text/javascript" src="topics/about_objects.js"></script>
-  <script type="text/javascript" src="topics/about_arrays.js"></script>
-  <script type="text/javascript" src="topics/about_reflection.js"></script>
-  <script type="text/javascript" src="topics/about_prototype_chain.js"></script>
-  <script type="text/javascript" src="topics/about_prototypal_inheritance.js"></script>
-  <script type="text/javascript" src="topics/about_functions_and_closure.js"></script>
-  <script type="text/javascript" src="topics/about_this.js"></script>
-  <script type="text/javascript" src="topics/about_scope.js"></script>
-  <script type="text/javascript" src="topics/about_regular_expressions.js"></script> 
-  <script type="text/javascript" src="topics/about_jasmine_matchers.js"></script>  -->
+  <script type="text/javascript" src="topics/about_operators.js"></script><!--  5 -->
+  <script type="text/javascript" src="topics/about_equality.js"></script><!--  5 -->
+  <script type="text/javascript" src="topics/about_truthyness.js"></script><!--  4 -->
+  <script type="text/javascript" src="topics/about_assignment.js"></script><!--  2 -->
+  <script type="text/javascript" src="topics/about_control_structures.js"></script><!--  6 -->
+  <script type="text/javascript" src="topics/about_strings.js"></script><!--  7 -->
+  <script type="text/javascript" src="topics/about_numbers.js"></script><!--  2 -->
+  <script type="text/javascript" src="topics/about_objects.js"></script><!--  5 -->
+  <script type="text/javascript" src="topics/about_arrays.js"></script><!--  5 -->
+  <script type="text/javascript" src="topics/about_reflection.js"></script><!--  5 -->
+  <script type="text/javascript" src="topics/about_prototype_chain.js"></script><!--  6 -->
+  <script type="text/javascript" src="topics/about_prototypal_inheritance.js"></script><!--  4 -->
+  <script type="text/javascript" src="topics/about_functions_and_closure.js"></script><!--  6 -->
+  <script type="text/javascript" src="topics/about_this.js"></script><!--  3 -->
+  <script type="text/javascript" src="topics/about_scope.js"></script><!--  2 -->
+  <script type="text/javascript" src="topics/about_regular_expressions.js"></script> <!--  4 -->
   <!-- include source files here... -->
 
 
@@ -47,11 +46,11 @@
 
             $( '#__jasmine_TrivialReporter_showPassed__' )
               .trigger( 'click' )
-              .trigger( 'click' ) //on chrome, two are needed...
+              //.trigger( 'click' ) //on chrome, two are needed...
               .attr( 'checked', true );
             $('#__jasmine_TrivialReporter_showSkipped__')
               .trigger( 'click' )
-              .trigger( 'click' )
+              //.trigger( 'click' )
               .attr( 'checked', true);
           }
         })();
