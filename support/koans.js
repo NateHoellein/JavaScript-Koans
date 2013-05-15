@@ -1,27 +1,34 @@
 // Jasmine overrides to handle '--' for this koans.
 
 var __ = 'incomplete';
+var message =  "Oops this spec has not been fixed, you have more work to do.";
 
 var originalToBe = jasmine.Matchers.prototype.toBe;
 var originalToEqual = jasmine.Matchers.prototype.toEqual;
 var originalToMatch = jasmine.Matchers.prototype.toMatch;
 
 var OverrideExpect = function(that, expected, originalExpect) {
-  if(literalTest(expected,that.actual)) {
+
+    if(objectTest(expected,that.actual)) {
       that.message = function() {
-        return "Oops this spec has not been fixed, you have more work to do.";
+        return message;
+      };
+      return false;
+    } 
+    if(literalTest(expected,that.actual)) {
+      that.message = function() {
+        return message;
       }
       return false;
     } 
     if(stringTest(expected,that.actual)) {
       that.message = function() {
-        return "Oops this spec has not been fixed, you have more work to do.";
+        return message;
       };
       return false;
     }  
-    else {
-      return originalExpect.call(that,expected);  
-    };
+    return originalExpect.call(that,expected);  
+   
 };
 
 jasmine.Matchers.prototype.toBe = function(expected) {
@@ -36,10 +43,48 @@ jasmine.Matchers.prototype.toMatch = function(expected) {
   return OverrideExpect(this,expected, originalToMatch);
 };
 
+var constantCheck = function(value) {
+  return value === __;
+};
+
+var stringCheck = function(value) {
+  return value === '__'; 
+};
+
 var literalTest = function(expected,actual) {
-  return expected === __ || (actual.indexOf(__) >= 0); 
+  if(typeof(expected) === 'string' && typeof(actual) === 'string') {
+    return expected === __ || actual === __; 
+  };
+  return;
 };
 
 var stringTest = function(expected, actual) {
-  return expected === '__' || (actual.indexOf('__') >= 0); 
+  if(typeof(expected) === 'string' && typeof(actual) === 'string') {
+    return (expected.indexOf('__') >=0) || (actual.indexOf('__') >= 0); 
+  }
+  return;
 };
+
+var objectTest = function(expected, actual) {
+  var isExpectedIncomplete,isActualIncomplete = false;
+  if(checkProperties(expected)) {
+    isExpectedIncomplete = true;
+  }
+
+  if(isIncomplete = checkProperties(actual)) {
+    isActualIncomplete = true;
+  }
+  return isExpectedIncomplete || isActualIncomplete;
+};
+
+var checkProperties = function(myObject) {
+  for(var key in myObject) {
+    if(myObject.hasOwnProperty(key)) {
+      var obj = myObject[key];
+      if(stringCheck(obj) || constantCheck(obj)) {
+        return true;  
+      }
+    }
+  }
+};
+
