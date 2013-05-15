@@ -8,21 +8,28 @@ var originalToEqual = jasmine.Matchers.prototype.toEqual;
 var originalToMatch = jasmine.Matchers.prototype.toMatch;
 
 var OverrideExpect = function(that, expected, originalExpect) {
+  
+  if(that.actual === undefined) {
+    that.message = function() {
+      return message;
+    };
+    return false;
+  }
 
-    if(objectTest(expected,that.actual)) {
-      that.message = function() {
-        return message;
-      };
-      return false;
-    } 
-    if(literalTest(expected,that.actual) || stringTest(expected,that.actual)) {
-      that.message = function() {
-        return message;
-      }
-      return false;
-    } 
-    
-    return originalExpect.call(that,expected);  
+  if(objectTest(expected,that.actual)) {
+    that.message = function() {
+      return message;
+    };
+    return false;
+  } 
+  if(literalTest(expected,that.actual) || stringTest(expected,that.actual)) {
+    that.message = function() {
+      return message;
+    }
+    return false;
+  } 
+  
+  return originalExpect.call(that,expected);  
    
 };
 
@@ -47,7 +54,9 @@ var constantCheck = function(value) {
 };
 
 var stringCheck = function(value) {
-  return value.indexOf('__') >= 0; 
+  if(isString(value)) {
+    return value.indexOf('__') >= 0 || value.indexOf(__) >= 0; 
+  }
 };
 
 var literalTest = function(expected,actual) {
@@ -65,7 +74,7 @@ var objectTest = function(expected, actual) {
     isExpectedIncomplete = true;
   }
 
-  if(isIncomplete = checkProperties(actual)) {
+  if(checkProperties(actual)) {
     isActualIncomplete = true;
   }
   return isExpectedIncomplete || isActualIncomplete;
@@ -75,7 +84,7 @@ var checkProperties = function(myObject) {
   for(var key in myObject) {
     if(myObject.hasOwnProperty(key)) {
       var obj = myObject[key];
-      if(stringCheck(obj) || constantCheck(obj)) {
+      if(stringCheck(obj) || constantCheck(obj) || stringCheck(key)) {
         return true;  
       }
     }
