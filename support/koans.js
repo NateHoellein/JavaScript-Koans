@@ -15,18 +15,13 @@ var OverrideExpect = function(that, expected, originalExpect) {
       };
       return false;
     } 
-    if(literalTest(expected,that.actual)) {
+    if(literalTest(expected,that.actual) || stringTest(expected,that.actual)) {
       that.message = function() {
         return message;
       }
       return false;
     } 
-    if(stringTest(expected,that.actual)) {
-      that.message = function() {
-        return message;
-      };
-      return false;
-    }  
+    
     return originalExpect.call(that,expected);  
    
 };
@@ -43,30 +38,29 @@ jasmine.Matchers.prototype.toMatch = function(expected) {
   return OverrideExpect(this,expected, originalToMatch);
 };
 
+var isString = function(value) {
+  return typeof(value) === 'string';
+};
+
 var constantCheck = function(value) {
   return value === __;
 };
 
 var stringCheck = function(value) {
-  return value === '__'; 
+  return value.indexOf('__') >= 0; 
 };
 
 var literalTest = function(expected,actual) {
-  if(typeof(expected) === 'string' && typeof(actual) === 'string') {
-    return expected === __ || actual === __; 
-  };
-  return;
+    return constantCheck(expected) || constantCheck(actual); 
 };
 
 var stringTest = function(expected, actual) {
-  if(typeof(expected) === 'string' && typeof(actual) === 'string') {
-    return (expected.indexOf('__') >=0) || (actual.indexOf('__') >= 0); 
-  }
-  return;
+    return (stringCheck(expected) || stringCheck(actual)); 
 };
 
 var objectTest = function(expected, actual) {
-  var isExpectedIncomplete,isActualIncomplete = false;
+  var isExpectedIncomplete = false
+    ,isActualIncomplete = false;
   if(checkProperties(expected)) {
     isExpectedIncomplete = true;
   }

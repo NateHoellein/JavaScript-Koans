@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Special Koans Jasmine Spec Runner</title>
+
+
+  <link rel="stylesheet" type="text/css" href="jasmine.css">
+  <script type="text/javascript" src="jasmine.js"></script>
+  <script type="text/javascript" src="jasmine-html.js"></script>
+  <script type="text/javascript" src="jquery.js"></script>
+
+  <!-- include spec files here ... -->
+  <script type="text/javascript" src="koans.js"></script>
+  <script type="text/javascript" src="koans_spec.js"></script> 
+  <!--<script type="text/javascript" src="topics/about_operators.js"></script>
+  <script type="text/javascript" src="topics/about_equality.js"></script>
+  <script type="text/javascript" src="topics/about_truthyness.js"></script>
+  <script type="text/javascript" src="topics/about_assignment.js"></script>
+  <script type="text/javascript" src="topics/about_control_structures.js"></script>
+  <script type="text/javascript" src="topics/about_strings.js"></script>
+  <script type="text/javascript" src="topics/about_numbers.js"></script>
+  <script type="text/javascript" src="topics/about_objects.js"></script>
+  <script type="text/javascript" src="topics/about_arrays.js"></script>
+  <script type="text/javascript" src="topics/about_reflection.js"></script>
+  <script type="text/javascript" src="topics/about_prototype_chain.js"></script>
+  <script type="text/javascript" src="topics/about_prototypal_inheritance.js"></script>
+  <script type="text/javascript" src="topics/about_functions_and_closure.js"></script>
+  <script type="text/javascript" src="topics/about_this.js"></script>
+  <script type="text/javascript" src="topics/about_scope.js"></script>
+  <script type="text/javascript" src="topics/about_regular_expressions.js"></script> -->
+  <!-- include source files here... -->
+
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+      jasmineEnv.verbose = true;
+
+        // This function proxies the trivial reporter so that it shows the passed tests by default. Good in class.
+        (function(){
+          var proxied = jasmine.TrivialReporter.prototype.reportRunnerResults;
+          jasmine.TrivialReporter.prototype.reportRunnerResults = function(){
+            proxied.apply(this, arguments);
+
+            $( '#__jasmine_TrivialReporter_showPassed__' )
+              .trigger( 'click' )
+              //.trigger( 'click' ) //on chrome, two are needed...
+              .attr( 'checked', true );
+            $('#__jasmine_TrivialReporter_showSkipped__')
+              .trigger( 'click' )
+              //.trigger( 'click' )
+              .attr( 'checked', true);
+          }
+        })();
+      var trivialReporter = new jasmine.TrivialReporter();
+
+
+      jasmineEnv.addReporter(trivialReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return trivialReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+        $('#')
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+
+</body>
+</html>
